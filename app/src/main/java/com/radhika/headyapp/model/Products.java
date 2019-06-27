@@ -1,25 +1,34 @@
 package com.radhika.headyapp.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
+@Entity
 public class Products {
 
+    @ColumnInfo
     @SerializedName("id")
-    public String id;
+    private String id;
 
+    @ColumnInfo
     @SerializedName("name")
-    public String name;
+    private String name;
 
+    @ColumnInfo
     @SerializedName("date_added")
-    public String date_product;
+    private String date_product;
 
+    @Ignore
     @SerializedName("variants")
-    public List<Variants> variants;
+    private List<Variants> variants;
 
+    @Ignore
     @SerializedName("tax")
-    public Tax tax;
+    private Tax tax;
 
     public List<Variants> getVariants() {
         return variants;

@@ -1,12 +1,20 @@
 package com.radhika.headyapp.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.Embedded;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
+
 public class Rankings {
+
+    @Embedded
     @SerializedName("ranking")
-    public String ranking;
+    private String ranking;
+
+
+    @SerializedName("products")
+    private List<RankProduct> rankProduct;
 
     public List<RankProduct> getRankProduct() {
         return rankProduct;
@@ -16,8 +24,6 @@ public class Rankings {
         this.rankProduct = rankProduct;
     }
 
-    @SerializedName("products")
-    public List<RankProduct> rankProduct;
 
     public String getRanking() {
         return ranking;

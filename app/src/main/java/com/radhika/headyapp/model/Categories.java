@@ -1,24 +1,31 @@
 package com.radhika.headyapp.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity
 public class Categories {
 
+    @ColumnInfo(name = "id")
     @SerializedName("id")
-    public String id;
+    private String id;
 
+    @ColumnInfo
     @SerializedName("name")
-    public String name;
+    private String name;
 
+    @Ignore
     @SerializedName("products")
     public List<Products> products;
 
+    @Ignore
     @SerializedName("child_categories")
-    public List<Integer> child_cat;
-
-
+    private List<Integer> child_cat;
 
     public List<Integer> getChild_cat() {
         return child_cat;
@@ -27,8 +34,6 @@ public class Categories {
     public void setChild_cat(List<Integer> child_cat) {
         this.child_cat = child_cat;
     }
-
-
 
     public List<Products> getProducts() {
         return products;

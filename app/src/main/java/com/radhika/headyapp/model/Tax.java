@@ -1,13 +1,18 @@
 package com.radhika.headyapp.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class Tax {
+    @ColumnInfo
     @SerializedName("name")
-    public String name;
+    private String name;
 
+    @ColumnInfo
     @SerializedName("value")
-    public String value;
+    private String value;
 
     public String getName() {
         return name;

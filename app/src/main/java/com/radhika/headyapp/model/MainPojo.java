@@ -1,17 +1,19 @@
 package com.radhika.headyapp.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class MainPojo {
 
-
     @SerializedName("categories")
-    public List<Categories> categories;
+    private List<Categories> categories;
 
     @SerializedName("rankings")
-    public List<Rankings>rankings;
+    private List<Rankings>rankings;
+
+    public List<Rankings> getRankings() {
+        return rankings;
+    }
 
     public List<Categories> getCategories() {
         return categories;

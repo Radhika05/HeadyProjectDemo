@@ -1,19 +1,27 @@
 package com.radhika.headyapp.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class Variants {
+
+    @ColumnInfo
     @SerializedName("id")
-    public String id;
+    private String id;
 
+    @ColumnInfo
     @SerializedName("color")
-    public String color;
+    private String color;
 
+    @ColumnInfo
     @SerializedName("size")
-    public String size;
+    private String size;
 
+    @ColumnInfo
     @SerializedName("price")
-    public String price;
+    private String price;
 
     public String getId() {
         return id;

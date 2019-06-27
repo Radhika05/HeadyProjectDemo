@@ -10,7 +10,4 @@ public interface ProductAPIService {
 
     @GET(BASE_URL)
     Call<MainPojo> getProductDetails();
-    //Call<List<MainPojo>> getProductDetails();
-
-
 }
