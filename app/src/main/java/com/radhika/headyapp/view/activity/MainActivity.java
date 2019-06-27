@@ -1,4 +1,4 @@
-package com.radhika.headyapp.view;
+package com.radhika.headyapp.view.activity;
 
 import android.os.Bundle;
 

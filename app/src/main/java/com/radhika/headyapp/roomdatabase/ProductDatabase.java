@@ -9,7 +9,7 @@ import com.radhika.headyapp.model.Rankings;
 import com.radhika.headyapp.model.Tax;
 import com.radhika.headyapp.model.Variants;
 
-@Database(entities = {Products.class, Categories.class, Rankings.class, RankProduct.class, Tax.class, Variants.class}, version = 1)
+@Database(entities = {Products.class, Categories.class, Rankings.class, RankProduct.class, Tax.class, Variants.class}, version = 1,exportSchema = false)
 public abstract class ProductDatabase extends RoomDatabase {
     public abstract ProductDao productDao();
 }

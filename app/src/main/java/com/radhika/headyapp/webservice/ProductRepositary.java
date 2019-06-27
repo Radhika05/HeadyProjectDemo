@@ -13,6 +13,7 @@ import com.radhika.headyapp.model.Tax;
 import com.radhika.headyapp.model.Variants;
 import com.radhika.headyapp.roomdatabase.DatabaseManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -62,24 +63,34 @@ public class ProductRepositary {
                  List<Categories> categories = productList.getValue().getCategories();
 
 
-                List<Products> products = null;
-                for(int i=0;i<=categories.size();i++){
-                    products.addAll(categories.get(i).getProducts());
+                List<Products> products = new ArrayList<>();
+                for(int i=0;i<=categories.size()-1;i++){
+                    List productsItem = categories.get(i).getProducts();
+                    products.addAll(productsItem);
                 }
 
-                List<Variants> variants = null;
-                for(int i=0;i<=products.size();i++){
-                    variants.addAll(products.get(i).getVariants());
+                List<Variants> variants = new ArrayList<>();;
+                for(int i=0;i<=products.size()-1;i++){
+                    List variantsItem = products.get(i).getVariants();
+                    if(variantsItem!=null){
+                        variants.addAll(variantsItem);
+                    }
                 }
 
-                List<Tax> taxes = null;
-                for(int i=0;i<=products.size();i++){
-                    taxes.add(products.get(i).getTax());
+                List<Tax> taxes = new ArrayList<>();;
+                for(int i=0;i<=products.size()-1;i++){
+                    Tax tax =  products.get(i).getTax();
+                    if(tax!=null){
+                        taxes.add(tax);
+                    }
                 }
 
-                List<RankProduct> rankProducts = null;
-                for(int i = 0;i<=productList.getValue().getRankings().size();i++){
-                    rankProducts.addAll(productList.getValue().getRankings().get(i).getRankProduct());
+                List<RankProduct> rankProducts = new ArrayList<>();;
+                for(int i = 0;i<=productList.getValue().getRankings().size()-1;i++){
+                    List rankProduct = productList.getValue().getRankings().get(i).getRankProduct();
+                    if(rankProduct!=null){
+                        rankProducts.addAll(rankProduct);
+                    }
                 }
 
                 //insert Category

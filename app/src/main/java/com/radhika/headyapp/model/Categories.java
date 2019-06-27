@@ -3,6 +3,7 @@ package com.radhika.headyapp.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,6 +11,11 @@ import java.util.List;
 
 @Entity
 public class Categories {
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int ids;
+
 
     @ColumnInfo(name = "id")
     @SerializedName("id")
@@ -22,6 +28,15 @@ public class Categories {
     @Ignore
     @SerializedName("products")
     public List<Products> products;
+
+
+    public int getIds() {
+        return ids;
+    }
+
+    public void setIds(int ids) {
+        this.ids = ids;
+    }
 
     @Ignore
     @SerializedName("child_categories")

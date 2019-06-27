@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.activity.MainActivity">
 
-    <view
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="match_parent"

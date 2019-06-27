@@ -3,12 +3,18 @@ package com.radhika.headyapp.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 @Entity
 public class Products {
+
+
+
+    @PrimaryKey(autoGenerate = true)
+    private int ids;
 
     @ColumnInfo
     @SerializedName("id")
@@ -29,6 +35,14 @@ public class Products {
     @Ignore
     @SerializedName("tax")
     private Tax tax;
+
+    public int getIds() {
+        return ids;
+    }
+
+    public void setIds(int ids) {
+        this.ids = ids;
+    }
 
     public List<Variants> getVariants() {
         return variants;

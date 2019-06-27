@@ -11,7 +11,7 @@ public class DatabaseManager {
 
 
     private DatabaseManager(Context mCtx) {
-        productDatabase = Room.databaseBuilder(mCtx, ProductDatabase.class, DATABASE_NAME).build();
+        productDatabase = Room.databaseBuilder(mCtx, ProductDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
     }
 
     public static synchronized DatabaseManager getInstance(Context mCtx) {
