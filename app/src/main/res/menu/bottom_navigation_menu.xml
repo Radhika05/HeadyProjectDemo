@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/my_service"
+        android:title="@string/label_menu_home"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/my_service"
+        android:title="@string/label_menu_home"
+        android:visible="false"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/none"
+        android:title="download"
+        android:visible="true"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/filter"
+        android:title="@string/label_menu_search"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+</menu>

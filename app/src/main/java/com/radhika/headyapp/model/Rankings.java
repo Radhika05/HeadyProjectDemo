@@ -1,22 +1,22 @@
 package com.radhika.headyapp.model;
 
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 @Entity
 public class Rankings {
 
-    @Embedded
     @SerializedName("ranking")
     private String ranking;
 
     @PrimaryKey(autoGenerate = true)
     private int ids;
+
 
     @Ignore
     @SerializedName("products")

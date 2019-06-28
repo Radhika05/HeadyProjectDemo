@@ -9,13 +9,15 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class Variants {
 
-
     @PrimaryKey(autoGenerate = true)
     private int ids;
 
     @ColumnInfo
     @SerializedName("id")
     private String id;
+
+    @ColumnInfo(name = "product_id")
+    private int product_id;
 
     @ColumnInfo
     @SerializedName("color")
@@ -37,6 +39,15 @@ public class Variants {
     public void setIds(int ids) {
         this.ids = ids;
     }
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
 
     public String getId() {
         return id;

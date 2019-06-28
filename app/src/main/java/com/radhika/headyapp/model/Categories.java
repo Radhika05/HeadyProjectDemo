@@ -12,14 +12,12 @@ import java.util.List;
 @Entity
 public class Categories {
 
-
     @PrimaryKey(autoGenerate = true)
     private int ids;
 
-
     @ColumnInfo(name = "id")
     @SerializedName("id")
-    private String id;
+    private int id;
 
     @ColumnInfo
     @SerializedName("name")
@@ -28,7 +26,6 @@ public class Categories {
     @Ignore
     @SerializedName("products")
     public List<Products> products;
-
 
     public int getIds() {
         return ids;
@@ -58,11 +55,11 @@ public class Categories {
         this.products = products;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

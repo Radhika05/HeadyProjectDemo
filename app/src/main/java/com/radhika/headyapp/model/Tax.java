@@ -12,6 +12,9 @@ public class Tax {
     @PrimaryKey(autoGenerate = true)
     private int ids;
 
+    @ColumnInfo(name = "product_id")
+    private int product_id;
+
     @ColumnInfo
     @SerializedName("name")
     private String name;
@@ -20,9 +23,17 @@ public class Tax {
     @SerializedName("value")
     private String value;
 
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
     public String getName() {
         return name;
-
     }
 
     public int getIds() {

@@ -13,6 +13,9 @@ public class RankProduct {
     private int ids;
 
     @ColumnInfo
+    private int catergory_Id;
+
+    @ColumnInfo
     @SerializedName("id")
     private int id;
 
@@ -43,6 +46,14 @@ public class RankProduct {
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public int getCatergory_Id() {
+        return catergory_Id;
+    }
+
+    public void setCatergory_Id(int catergory_Id) {
+        this.catergory_Id = catergory_Id;
     }
 
 

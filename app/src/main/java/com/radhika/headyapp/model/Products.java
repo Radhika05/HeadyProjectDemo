@@ -11,14 +11,15 @@ import java.util.List;
 @Entity
 public class Products {
 
-
-
     @PrimaryKey(autoGenerate = true)
     private int ids;
 
+    @ColumnInfo(name = "category")
+    private int category_id;
+
     @ColumnInfo
     @SerializedName("id")
-    private String id;
+    private int id;
 
     @ColumnInfo
     @SerializedName("name")
@@ -36,6 +37,15 @@ public class Products {
     @SerializedName("tax")
     private Tax tax;
 
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
     public int getIds() {
         return ids;
     }
@@ -52,13 +62,11 @@ public class Products {
         this.variants = variants;
     }
 
-
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -85,6 +93,5 @@ public class Products {
     public void setTax(Tax tax) {
         this.tax = tax;
     }
-
 
 }
