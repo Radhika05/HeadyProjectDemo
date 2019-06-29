@@ -2,17 +2,21 @@ package com.radhika.headyapp.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 @Entity
+@ForeignKey(entity = Categories.class, parentColumns = "id", childColumns = "category")
 public class Products {
 
     @PrimaryKey(autoGenerate = true)
     private int ids;
+
 
     @ColumnInfo(name = "category")
     private int category_id;

@@ -20,7 +20,7 @@
     <item
         android:id="@+id/none"
         android:title="download"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="never"/>
 
     <item

@@ -20,4 +20,5 @@
     <color name="color_tab_4">#6C4A42</color>
     <color name="color_tab_5">#F63D2B</color>
     <color name="grey_300">#E0E0E0</color>
+    <color name="color_notification_back">#4c4cff</color>
 </resources>

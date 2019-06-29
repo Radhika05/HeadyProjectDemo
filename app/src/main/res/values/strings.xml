@@ -6,4 +6,8 @@
     <string name="label_menu_home">Home</string>
     <string name="label_menu_search">Search</string>
     <string name="image">image</string>
+    <string name="filter_by">Filter By</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+    <string name="search">Search</string>
 </resources>

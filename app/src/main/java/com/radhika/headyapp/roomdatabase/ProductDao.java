@@ -39,9 +39,15 @@ public interface ProductDao {
     void insertSubCategory(List<Child_Category> child_categories);
 
     @Query("SELECT * FROM categories where categories.id in (select child_category.catId from child_category)")
-    public LiveData<List<Categories>> getCategories();
+    public List<Categories> getCategories();
 
-   /* @Query("select * from categories")
-    void List<Categories> getCatefory();*/
+    @Query("SELECT * FROM categories where categories.id in (select child_category.catId from child_category)")
+    public LiveData<List<Categories>> getCategoriesdata();
 
+
+    @Query("SELECT * FROM products left join categories on products.category = categories.id where products.category=:id")
+    public LiveData<List<Products>> getSubCategoriesdata(int id);
+
+    @Query("SELECT * FROM products left join categories on products.category = categories.id where products.id=:id")
+    public List<Products> getSubCategoriesdataA(int id);
 }

@@ -2,20 +2,22 @@ package com.radhika.headyapp.view.Fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.radhika.headyapp.databinding.FragmentCategoryBinding;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.radhika.headyapp.R;
 import com.radhika.headyapp.model.Categories;
+import com.radhika.headyapp.model.MainPojo;
 import com.radhika.headyapp.view.adapter.CategoryAdapter;
 import com.radhika.headyapp.viewmodel.ProductViewModel;
 
@@ -25,45 +27,74 @@ import java.util.List;
 public class CategoryFragment extends Fragment {
 
     private ProductViewModel productViewModel;
-    private FragmentCategoryBinding binding;
+    private RecyclerView recyclerView;
+    ShimmerFrameLayout shimmerFrameLayout;
+
 
     public CategoryFragment() {
         // Required empty public constructor
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        FragmentCategoryBinding binding = FragmentCategoryBinding.inflate(getLayoutInflater(), container, false);
-        View view = binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_category, container, false);// Inflate the layout for this fragment
+        recyclerView=view.findViewById(R.id.dashboard_recycler);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer);
+
+        getCategoryList();
+
         productViewModel= ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getHeroes(getContext()).observe(this, new Observer<List<Categories>>() {
+        productViewModel.getHeroes(getContext()).observe(this, new Observer<MainPojo>() {
             @Override
-            public void onChanged(List<Categories> categories) {
+            public void onChanged(MainPojo categories) {
+                Log.d("onChanged",categories.toString());
 
             }
         });
 
-        getCategoryList();
+        productViewModel.getCategory(getContext()).observe(this, new Observer<List<Categories>>() {
+            @Override
+            public void onChanged(List<Categories> categories) {
+                if(categories!=null){
+                    recyclerView.setVisibility(View.VISIBLE);
+                    CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categories);
+                    recyclerView.setAdapter(categoryAdapter);
+                }
+            }
+        });
+
+
+
         return view;
 
 
     }
 
-    private void getCategoryList() {
-         LiveData<List<Categories>> categoryList =  productViewModel.getHeroes(getContext());
-         if(categoryList!=null){
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
 
-             CategoryAdapter categoryAdapter = new CategoryAdapter(this, categoryList);
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }
+
+    private void getCategoryList() {
+
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
              RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-             binding.dashboardRecycler.setLayoutManager(mLayoutManager);
-             binding.dashboardRecycler.setItemAnimator(new DefaultItemAnimator());
-             binding.dashboardRecycler.setAdapter(categoryAdapter);
-            // categoryAdapter.setOnItemClickListener(onItemClickListener);
+             recyclerView.setLayoutManager(mLayoutManager);
+             recyclerView.setItemAnimator(new DefaultItemAnimator());
          }
     }
 
 
-}
+
