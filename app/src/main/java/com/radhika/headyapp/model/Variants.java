@@ -1,5 +1,6 @@
 package com.radhika.headyapp.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -9,9 +10,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class Variants {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
-
+    @PrimaryKey@NonNull
     @ColumnInfo
     @SerializedName("id")
     private String id;
@@ -32,14 +31,6 @@ public class Variants {
     private String price;
 
 
-    public int getIds() {
-        return ids;
-    }
-
-    public void setIds(int ids) {
-        this.ids = ids;
-    }
-
     public int getProduct_id() {
         return product_id;
     }
@@ -47,7 +38,6 @@ public class Variants {
     public void setProduct_id(int product_id) {
         this.product_id = product_id;
     }
-
 
     public String getId() {
         return id;

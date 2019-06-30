@@ -9,12 +9,10 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class RankProduct {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
-
     @ColumnInfo
     private int catergory_Id;
 
+    @PrimaryKey
     @ColumnInfo
     @SerializedName("id")
     private int id;
@@ -22,15 +20,6 @@ public class RankProduct {
     @ColumnInfo
     @SerializedName("view_count")
     private int viewCount;
-
-
-    public int getIds() {
-        return ids;
-    }
-
-    public void setIds(int ids) {
-        this.ids = ids;
-    }
 
     public int getId() {
         return id;
@@ -55,6 +44,4 @@ public class RankProduct {
     public void setCatergory_Id(int catergory_Id) {
         this.catergory_Id = catergory_Id;
     }
-
-
 }

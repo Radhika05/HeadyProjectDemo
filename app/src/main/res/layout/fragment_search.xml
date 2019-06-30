@@ -1,61 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorWhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/category_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/label_menu_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/category_sp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="@drawable/spinner_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_txt" />
-
-
 
     <Button
-        android:id="@+id/reset_btn"
+        android:id="@+id/btnRank1"
         style="@style/innerButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:background="@color/color_notification_back"
         android:text="@string/reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_apply"
+        app:layout_constraintEnd_toStartOf="@+id/btnRank2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <Button
-        android:id="@+id/btn_apply"
+        android:id="@+id/btnRank2"
         style="@style/innerButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:background="@color/color_notification_back"
         android:text="@string/apply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/reset_btn"
+        app:layout_constraintEnd_toStartOf="@+id/btnRank3"
+        app:layout_constraintStart_toEndOf="@+id/btnRank1"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,6 +43,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="402dp" />
+        app:layout_constraintGuide_begin="68dp" />
+
+    <Button
+        android:id="@+id/btnRank3"
+        android:layout_width="wrap_content"
+        android:background="@color/color_notification_back"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        style="@style/innerButtonStyle"
+        android:layout_marginRight="10dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRank2"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

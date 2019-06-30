@@ -12,9 +12,10 @@ import java.util.List;
 @Entity
 public class Categories {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
+  /*  @PrimaryKey(autoGenerate = true)
+    private int ids;*/
 
+    @PrimaryKey
     @ColumnInfo(name = "id")
     @SerializedName("id")
     private int id;
@@ -27,13 +28,13 @@ public class Categories {
     @SerializedName("products")
     public List<Products> products;
 
-    public int getIds() {
+  /*  public int getIds() {
         return ids;
     }
 
     public void setIds(int ids) {
         this.ids = ids;
-    }
+    }*/
 
     @Ignore
     @SerializedName("child_categories")

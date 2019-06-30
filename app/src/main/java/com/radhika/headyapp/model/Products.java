@@ -14,13 +14,10 @@ import java.util.List;
 @ForeignKey(entity = Categories.class, parentColumns = "id", childColumns = "category")
 public class Products {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
-
-
     @ColumnInfo(name = "category")
     private int category_id;
 
+    @PrimaryKey
     @ColumnInfo
     @SerializedName("id")
     private int id;
@@ -48,14 +45,6 @@ public class Products {
 
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
-    }
-
-    public int getIds() {
-        return ids;
-    }
-
-    public void setIds(int ids) {
-        this.ids = ids;
     }
 
     public List<Variants> getVariants() {

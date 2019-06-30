@@ -9,64 +9,60 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.headyapp.R;
-import com.radhika.headyapp.model.TempSubCat;
+import com.radhika.headyapp.model.TempProduct;
 import com.radhika.headyapp.utils.FragmentsManager;
-import com.radhika.headyapp.view.Fragment.ProductFragment;
+import com.radhika.headyapp.view.Fragment.ViewProductDetailsFragment;
 
 import java.util.List;
 
-public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-   private FragmentActivity activity;
-    private List<TempSubCat> subcategories;
-
-    public SubCategoryAdapter(FragmentActivity activity, List<TempSubCat> subcategories) {
-        this.activity = activity;
-        this.subcategories = subcategories;
+    private List<TempProduct> tempProducts;
+    public ProductAdapter(List<TempProduct> tempProducts) {
+        this.tempProducts = tempProducts;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sub_category, parent, false);
-        return new ViewHolder(itemView);
+                .inflate(R.layout.category_list_item, parent, false);
+        return new ProductAdapter.ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TempSubCat products = subcategories.get(position);
-        holder.adTitle.setText(products.getCategories().getName());
+        TempProduct  tempProduct = tempProducts.get(position);
+        holder.adTitle.setText(tempProduct.products.getName());
+
     }
 
     @Override
     public int getItemCount() {
-        return subcategories.size();
+        return tempProducts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView adTitle;
-        private Context context;
+        Context context;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
             adTitle = itemView.findViewById(R.id.add_title_txt);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View view) {
             int position =  getLayoutPosition();
-            ProductFragment productFragment = new ProductFragment();
+            ViewProductDetailsFragment viewProductDetailsFragment = new ViewProductDetailsFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt("productId", subcategories.get(position).getCategories().getId());
-            productFragment.setArguments(bundle);
-            FragmentsManager.replaceFragment((Activity) context, productFragment, R.id.frame_one, true);
+            bundle.putInt("productItemId", tempProducts.get(position).products.getId());
+            viewProductDetailsFragment.setArguments(bundle);
+            FragmentsManager.replaceFragment((Activity) context, viewProductDetailsFragment, R.id.frame_one, true);
         }
     }
 }

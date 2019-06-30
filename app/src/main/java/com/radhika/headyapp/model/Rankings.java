@@ -17,7 +17,6 @@ public class Rankings {
     @PrimaryKey(autoGenerate = true)
     private int ids;
 
-
     @Ignore
     @SerializedName("products")
     private List<RankProduct> rankProduct;
@@ -38,7 +37,6 @@ public class Rankings {
         this.rankProduct = rankProduct;
     }
 
-
     public String getRanking() {
         return ranking;
     }
@@ -46,8 +44,4 @@ public class Rankings {
     public void setRanking(String ranking) {
         this.ranking = ranking;
     }
-
-
-
-
 }

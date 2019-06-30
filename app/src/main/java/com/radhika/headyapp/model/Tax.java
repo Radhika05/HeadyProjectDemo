@@ -9,9 +9,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class Tax {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
-
+    @PrimaryKey
     @ColumnInfo(name = "product_id")
     private int product_id;
 
@@ -23,7 +21,6 @@ public class Tax {
     @SerializedName("value")
     private String value;
 
-
     public int getProduct_id() {
         return product_id;
     }
@@ -34,14 +31,6 @@ public class Tax {
 
     public String getName() {
         return name;
-    }
-
-    public int getIds() {
-        return ids;
-    }
-
-    public void setIds(int ids) {
-        this.ids = ids;
     }
 
     public void setName(String name) {

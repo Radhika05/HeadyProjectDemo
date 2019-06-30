@@ -24,7 +24,7 @@
             android:layout_height="@dimen/_100sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:scaleType="fitXY"
-            android:contentDescription="@string/image" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/add_title_txt"
@@ -35,31 +35,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="@dimen/_5sdp" />
 
-        <TextView
-            android:id="@+id/ad_des_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:ellipsize="end"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:visibility="gone"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/ad_like_txt"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/ad_view_txt"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

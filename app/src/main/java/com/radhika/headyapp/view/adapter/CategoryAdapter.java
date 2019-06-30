@@ -6,30 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.headyapp.R;
 import com.radhika.headyapp.model.Categories;
 import com.radhika.headyapp.utils.FragmentsManager;
 import com.radhika.headyapp.view.Fragment.SubCategoryFragment;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private  FragmentActivity categoryFragment;
-    public List<Categories> categoryList;
-    private View.OnClickListener mOnItemClickListener;
-    Context mContext;
+    private List<Categories> categoryList;
+    private int[] img;
 
-
-    public CategoryAdapter(FragmentActivity categoryFragment, List<Categories> categoryList) {
-        this.categoryFragment  = categoryFragment;
+    public CategoryAdapter(List<Categories> categoryList, int[] img) {
         this.categoryList = categoryList;
+        this.img = img;
     }
 
     @NonNull
@@ -37,19 +35,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_list_item, parent, false);
-        itemView.setOnClickListener(mOnItemClickListener);
         return new ViewHolder(itemView);
-    }
-
-    public void setOnItemClickListener(View.OnClickListener itemClickListener) {
-        this.mOnItemClickListener = itemClickListener;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
       Categories categories = categoryList.get(position);
       holder.adTitle.setText(categories.getName());
-
+      Picasso.get().load(img[position]).placeholder(R.drawable.img2).into(holder.agImage);
     }
 
     @Override
@@ -59,12 +52,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView adTitle;
+        ImageView agImage;
         private Context context;
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             context = itemView.getContext();
             adTitle = itemView.findViewById(R.id.add_title_txt);
+            agImage = itemView.findViewById(R.id.add_image);
             itemView.setOnClickListener(this);
         }
 
@@ -75,7 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             Bundle bundle = new Bundle();
             bundle.putInt("categoryId", categoryList.get(position).getId());
             subCategoryFragment.setArguments(bundle);
-            FragmentsManager.replaceFragment((Activity) context, subCategoryFragment, R.id.frame, false);
+            FragmentsManager.addFragment((Activity) context, subCategoryFragment, R.id.frame_one, true);
         }
     }
 

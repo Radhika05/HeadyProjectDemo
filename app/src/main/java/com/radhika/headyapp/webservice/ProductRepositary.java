@@ -15,6 +15,9 @@ import com.radhika.headyapp.model.Products;
 import com.radhika.headyapp.model.RankProduct;
 import com.radhika.headyapp.model.Rankings;
 import com.radhika.headyapp.model.Tax;
+import com.radhika.headyapp.model.TempProduct;
+import com.radhika.headyapp.model.TempProductDetails;
+import com.radhika.headyapp.model.TempSubCat;
 import com.radhika.headyapp.model.Variants;
 import com.radhika.headyapp.roomdatabase.DatabaseManager;
 
@@ -69,73 +72,6 @@ public class ProductRepositary {
             public void onResponse(Call<MainPojo> call, Response<MainPojo> response) {
                 productList.setValue(response.body());
                 Log.d("onResponse", response.body().toString());
-                List<Variants> listVariants = new ArrayList<>();
-                List<Tax> listTax = new ArrayList<>();
-                List<Products> listProducts = new ArrayList<>();
-                List<Child_Category> listChildCateroty = new ArrayList<>();
-                List<RankProduct> listRankCategory = new ArrayList<>();
-                List<Categories> listCategory = new ArrayList<>();
-                List<Rankings> listRankProduct = new ArrayList<>();
-                Categories categories = new Categories();
-
-
-                for (int i = 0; i < productList.getValue().getCategories().size(); i++) {
-                    categories = productList.getValue().getCategories().get(i);
-                    for (int j = 0; j < productList.getValue().getCategories().get(i).getProducts().size(); j++) {
-                        Products products = productList.getValue().getCategories().get(i).getProducts().get(j);
-                        {
-                            for (int k = 0; k < productList.getValue().getCategories().get(i).getProducts().get(j).getVariants().size(); k++) {
-                                Variants variants = productList.getValue().getCategories().get(i).getProducts().get(j).getVariants().get(k);
-                                variants.setProduct_id(products.getId());
-                                listVariants.add(variants);
-                            }
-                            //getting the tax
-                            Tax tax = productList.getValue().getCategories().get(i).getProducts().get(j).getTax();
-                            tax.setProduct_id(products.getId());
-                            listTax.add(tax);
-                            products.setCategory_id(categories.getId());
-                            listProducts.add(products);
-                            listCategory.add(categories);
-                        }
-                    }
-                    //getting the sub category
-                    for (int j = 0; j < categories.getChild_cat().size(); j++) {
-                        Child_Category child_category = new Child_Category();
-                        int child = productList.getValue().getCategories().get(i).getChild_cat().get(j);
-                        child_category.setCategoty_id(categories.getId());
-                        child_category.setId(child);
-                        listChildCateroty.add(child_category);
-                    }
-
-                }
-
-                //getting the Ranking data
-
-                int size = productList.getValue().getRankings().size();
-                Log.d("size", String.valueOf(size));
-                for (int i = 0; i < productList.getValue().getRankings().size(); i++) {
-                    Rankings rankings = productList.getValue().getRankings().get(i);
-                    for (int j = 0; j < productList.getValue().getRankings().get(i).getRankProduct().size(); j++) {
-                        RankProduct rankProduct = productList.getValue().getRankings().get(i).getRankProduct().get(j);
-                        rankProduct.setCatergory_Id(productList.getValue().getRankings().get(i).getIds() + 1);
-                        listRankCategory.add(rankProduct);
-                        listRankProduct.add(rankings);
-                    }
-                }
-                //insert Category
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertCategory(productList.getValue().getCategories());
-                //insert Ranking
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertRanking(listRankProduct);
-                //insert Product
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertProduct(listProducts);
-                //insert Variants
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertVariant(listVariants);
-                //insert Tax
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertTaxes(listTax);
-                //insert ProductRank
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertProductRanking(listRankCategory);
-                //insert subcategory
-                DatabaseManager.getInstance(context).getAppDatabase().productDao().insertSubCategory(listChildCateroty);
 
             }
 
@@ -166,19 +102,92 @@ public class ProductRepositary {
         return getMutableLiveDataCategory();
     }
 
-    public LiveData<List<Products>> getSubCategory(Context context,int catID){
-        mutableLiveDataSubCategory =  DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdata(catID);
-        return getMutableLiveDataSubCategory();
-    }
 
-    public List<Products> getSubCategoryA(Context context,int catID){
-        List<Products> productsList =  DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdataA(catID);
-        return productsList;
+
+    public List<TempSubCat> getSubCategoryA(Context context,int catID){
+        return DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdataA(catID);
     }
 
 
+    public void inserData(Context context, MainPojo productList) {
+        List<Variants> listVariants = new ArrayList<>();
+        List<Tax> listTax = new ArrayList<>();
+        List<Products> listProducts = new ArrayList<>();
+        List<Child_Category> listChildCateroty = new ArrayList<>();
+        List<RankProduct> listRankCategory = new ArrayList<>();
+        List<Categories> listCategory = new ArrayList<>();
+        Categories categories = new Categories();
 
 
+        for (int i = 0; i < productList.getCategories().size(); i++) {
+            categories = productList.getCategories().get(i);
+            for (int j = 0; j < productList.getCategories().get(i).getProducts().size(); j++) {
+                Products products = productList.getCategories().get(i).getProducts().get(j);
+                {
+                    for (int k = 0; k < productList.getCategories().get(i).getProducts().get(j).getVariants().size(); k++) {
+                        Variants variants = productList.getCategories().get(i).getProducts().get(j).getVariants().get(k);
+                        variants.setProduct_id(products.getId());
+                        listVariants.add(variants);
+                    }
+                    //getting the tax
+                    Tax tax = productList.getCategories().get(i).getProducts().get(j).getTax();
+                    tax.setProduct_id(products.getId());
+                    listTax.add(tax);
+                    products.setCategory_id(categories.getId());
+                    listProducts.add(products);
+                    listCategory.add(categories);
+                }
+            }
+            //getting the sub category
+            for (int j = 0; j < categories.getChild_cat().size(); j++) {
+                Child_Category child_category = new Child_Category();
+                int child = productList.getCategories().get(i).getChild_cat().get(j);
+                child_category.setCategoty_id(categories.getId());
+                child_category.setId(child);
+                listChildCateroty.add(child_category);
+            }
+
+        }
+
+        for(int m = 0; m < productList.getRankings().size(); m++) {
+          int siez =  productList.getRankings().get(m).getRankProduct().size();
+          Log.i("size", String.valueOf(siez));
+            for (int j = 0; j < productList.getRankings().get(m).getRankProduct().size(); j++) {
+                RankProduct rankProduct = productList.getRankings().get(m).getRankProduct().get(j);
+                listRankCategory.add(rankProduct);
+            }
+        }
+        //insert Category
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertCategory(productList.getCategories());
+        //insert Ranking
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertRanking(productList.getRankings());
+        //insert Product
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertProduct(listProducts);
+        //insert Variants
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertVariant(listVariants);
+        //insert Tax
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertTaxes(listTax);
+        //insert ProductRank
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertProductRanking(listRankCategory);
+        //insert subcategory
+        DatabaseManager.getInstance(context).getAppDatabase().productDao().insertSubCategory(listChildCateroty);
 
 
+    }
+
+    public List<Rankings> getRankCategory(Context applicationContext) {
+        return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getRanking();
+    }
+
+    public LiveData<List<TempProduct>> getProduct(Context applicationContext, int prodctID) {
+        return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getProduct(prodctID);
+    }
+
+    public LiveData<List<TempProductDetails>> getProductDetails(Context applicationContext, int prodctID) {
+        return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getProductDetails(prodctID);
+    }
+
+   /* public  LiveData<List<Products>> getRankWiseProduct(Context applicationContext,int rankID){
+        return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getRankWiseProduct(rankID);
+    }*/
 }

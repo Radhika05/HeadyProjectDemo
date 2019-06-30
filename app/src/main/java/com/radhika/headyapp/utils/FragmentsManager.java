@@ -21,7 +21,7 @@ public class FragmentsManager {
         return ((AppCompatActivity)activity).getSupportFragmentManager();
     }
 
-    static void addFragment(Activity activity, Fragment fragment, int id, boolean add_to_backstack){
+    public static void addFragment(Activity activity, Fragment fragment, int id, boolean add_to_backstack){
         transaction = getTransaction(activity);
         transaction.add(id,fragment,fragment.getClass().getName());
         if (add_to_backstack)

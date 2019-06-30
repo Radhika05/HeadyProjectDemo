@@ -3,15 +3,18 @@ package com.radhika.headyapp.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity
+@ForeignKey(entity = Categories.class, parentColumns = "id", childColumns = "id")
 public class Child_Category {
 
 
-    @PrimaryKey(autoGenerate = true)
-    private int ids;
+  /*  @PrimaryKey(autoGenerate = true)
+    private int ids;*/
 
+    @PrimaryKey
     @ColumnInfo(name = "id")
     private int id;
 
@@ -35,14 +38,14 @@ public class Child_Category {
     public void setCategoty_id(int categoty_id) {
         this.categoty_id = categoty_id;
     }
-    public int getIds() {
+  /*  public int getIds() {
         return ids;
     }
 
     public void setIds(int ids) {
         this.ids = ids;
     }
-
+*/
 
 
 }
