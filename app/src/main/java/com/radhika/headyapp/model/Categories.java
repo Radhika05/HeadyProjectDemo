@@ -15,18 +15,16 @@ public class Categories {
   /*  @PrimaryKey(autoGenerate = true)
     private int ids;*/
 
+    @Ignore
+    @SerializedName("products")
+    public List<Products> products;
     @PrimaryKey
     @ColumnInfo(name = "id")
     @SerializedName("id")
     private int id;
-
     @ColumnInfo
     @SerializedName("name")
     private String name;
-
-    @Ignore
-    @SerializedName("products")
-    public List<Products> products;
 
   /*  public int getIds() {
         return ids;
@@ -35,7 +33,6 @@ public class Categories {
     public void setIds(int ids) {
         this.ids = ids;
     }*/
-
     @Ignore
     @SerializedName("child_categories")
     private List<Integer> child_cat;
