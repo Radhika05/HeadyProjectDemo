@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.radhika.headyapp.model.Categories;
 import com.radhika.headyapp.model.MainPojo;
+import com.radhika.headyapp.model.Products;
 import com.radhika.headyapp.model.Rankings;
 import com.radhika.headyapp.model.TempProduct;
 import com.radhika.headyapp.model.TempProductDetails;
@@ -66,9 +67,7 @@ public class ProductViewModel extends AndroidViewModel {
         return productRepositary.getProductDetails(applicationContext,productId);
     }
 
-   /* public LiveData<List<Products>> getRankWiseProduct(Context applicationContext, int productId){
+    public LiveData<List<Products>> getRankWiseProduct(Context applicationContext, int productId){
         return productRepositary.getRankWiseProduct(applicationContext,productId);
-    }*/
-
-
+    }
 }

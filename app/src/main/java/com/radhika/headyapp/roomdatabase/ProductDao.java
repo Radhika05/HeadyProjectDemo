@@ -63,7 +63,9 @@ public interface ProductDao {
     @Query("SELECT * from Rankings")
     public List<Rankings> getRanking();
 
-   /* @Query("SELECT * from Rankings")
-    public LiveData<List<Products>> getRankWiseProduct(int id);*/
+    @Query("SELECT * from RankProduct " +
+            "left join Products on Products.id = RankProduct.id " +
+            "where rankings_id = :id")
+    public LiveData<List<Products>> getRankWiseProduct(int id);
 
 }
