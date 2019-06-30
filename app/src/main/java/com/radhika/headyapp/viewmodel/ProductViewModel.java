@@ -43,12 +43,7 @@ public class ProductViewModel extends AndroidViewModel {
         return  mutableLiveDataCategory;
     }
 
-    public List<TempSubCat> getSubCategoryA(Context context,int catId) {
-        if (list == null) {
-            list =  productRepositary.getSubCategoryA(context,catId);
-        }
-        return  list;
-    }
+
 
     public void inserData(Context applicationContext, MainPojo categories) {
         productRepositary.inserData(applicationContext,categories);
@@ -64,6 +59,10 @@ public class ProductViewModel extends AndroidViewModel {
 
     public LiveData<List<TempProductDetails>> getProductDetails(Context applicationContext, int productId) {
         return productRepositary.getProductDetails(applicationContext,productId);
+    }
+
+    public LiveData<List<TempSubCat>> getSubCategoryA(Context applicationContext, int productId) {
+        return productRepositary.getSubCategoryA(applicationContext,productId);
     }
 
    /* public LiveData<List<Products>> getRankWiseProduct(Context applicationContext, int productId){

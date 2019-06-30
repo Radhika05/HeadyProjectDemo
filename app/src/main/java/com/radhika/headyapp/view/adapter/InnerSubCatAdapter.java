@@ -9,43 +9,39 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.headyapp.R;
 import com.radhika.headyapp.model.TempSubCat;
 import com.radhika.headyapp.utils.FragmentsManager;
-import com.radhika.headyapp.view.Fragment.InnerSubCatFragment;
+import com.radhika.headyapp.view.Fragment.ProductFragment;
 
 import java.util.List;
 
-public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.ViewHolder> {
+public class InnerSubCatAdapter extends RecyclerView.Adapter<InnerSubCatAdapter.ViewHolder> {
+    private List<TempSubCat> tempProducts;
 
-   private FragmentActivity activity;
-    private List<TempSubCat> subcategories;
-
-    public SubCategoryAdapter(FragmentActivity activity, List<TempSubCat> subcategories) {
-        this.activity = activity;
-        this.subcategories = subcategories;
+    public InnerSubCatAdapter(List<TempSubCat> tempProducts) {
+        this.tempProducts = tempProducts;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sub_category, parent, false);
-        return new ViewHolder(itemView);
+                .inflate(R.layout.category_list_item, parent, false);
+        return new InnerSubCatAdapter.ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TempSubCat products = subcategories.get(position);
+        TempSubCat products = tempProducts.get(position);
         holder.adTitle.setText(products.getCategories().getName());
     }
 
     @Override
     public int getItemCount() {
-        return subcategories.size();
+        return tempProducts.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -61,11 +57,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         @Override
         public void onClick(View view) {
             int position =  getLayoutPosition();
-            InnerSubCatFragment innerSubCatFragment = new InnerSubCatFragment();
+            ProductFragment productFragment = new ProductFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt("subcategory", subcategories.get(position).getCategories().getId());
-            innerSubCatFragment.setArguments(bundle);
-            FragmentsManager.replaceFragment((Activity) context, innerSubCatFragment, R.id.frame_one, true);
+            bundle.putInt("productId", tempProducts.get(position).getCategories().getId());
+            productFragment.setArguments(bundle);
+            FragmentsManager.replaceFragment((Activity) context, productFragment, R.id.frame_one, true);
         }
     }
 }

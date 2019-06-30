@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,42 +16,56 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.radhika.headyapp.R;
 import com.radhika.headyapp.model.TempSubCat;
-import com.radhika.headyapp.view.adapter.SubCategoryAdapter;
+import com.radhika.headyapp.view.adapter.InnerSubCatAdapter;
 import com.radhika.headyapp.viewmodel.ProductViewModel;
 
 import java.util.List;
 
-public class SubCategoryFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class InnerSubCatFragment extends Fragment {
 
+
+    int subCategotyId;
     private RecyclerView recyclerView;
-    private  ProductViewModel productViewModel;
-    private  int categotyId;
-    private  ShimmerFrameLayout shimmerFrameLayout;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_sub_category, container, false);
-        productViewModel= ViewModelProviders.of(this).get(ProductViewModel.class);
+        View view =  inflater.inflate(R.layout.fragment_inner_sub_cat, container, false);
         bindUI(view);
         getIntentData();
-        bindRecyerview();
+        setRecyclerView();
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getSubCategoryA(getContext(),categotyId).observe(this, new Observer<List<TempSubCat>>() {
+        productViewModel.getSubCategoryA(getContext(),subCategotyId).observe(this, new Observer<List<TempSubCat>>() {
             @Override
             public void onChanged(List<TempSubCat> tempProducts) {
                 recyclerView.setVisibility(View.VISIBLE);
-                SubCategoryAdapter subCategoryAdapter = new SubCategoryAdapter(getActivity(), tempProducts);
-                recyclerView.setAdapter(subCategoryAdapter);
+                InnerSubCatAdapter innerSubCatAdapter = new InnerSubCatAdapter(tempProducts);
+                recyclerView.setAdapter(innerSubCatAdapter);
             }
         });
         return view;
     }
 
+
+
+    private void setRecyclerView(){
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+
     private void getIntentData() {
         assert getArguments() != null;
-        categotyId = getArguments().getInt("categoryId");
+        subCategotyId = getArguments().getInt("subcategory");
     }
 
     private void bindUI(View view){
@@ -60,12 +73,4 @@ public class SubCategoryFragment extends Fragment {
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
     }
 
-    private void bindRecyerview() {
-        shimmerFrameLayout.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        shimmerFrameLayout.stopShimmer();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
 }

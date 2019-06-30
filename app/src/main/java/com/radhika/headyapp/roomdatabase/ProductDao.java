@@ -52,7 +52,7 @@ public interface ProductDao {
     public LiveData<List<Categories>> getCategoriesdata();
 
     @Query("SELECT Categories.*, Child_Category.* FROM child_category left join categories on child_category.id = categories.id where child_category.catId=:id")
-    public List<TempSubCat> getSubCategoriesdataA(int id);
+    public LiveData<List<TempSubCat>> getSubCategoriesdataA(int id);
 
     @Query("SELECT Products.name, Products.id FROM products left join categories on products.category = categories.id where products.category=:id")
     public LiveData<List<TempProduct>> getProduct(int id);

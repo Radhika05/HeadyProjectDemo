@@ -102,7 +102,7 @@ public class ProductRepositary {
     }
 
 
-    public List<TempSubCat> getSubCategoryA(Context context, int catID) {
+    public LiveData<List<TempSubCat>> getSubCategoryA(Context context, int catID) {
         return DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdataA(catID);
     }
 
