@@ -183,7 +183,7 @@ public class ProductRepositary {
         return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getProductDetails(prodctID);
     }
 
-   /* public  LiveData<List<Products>> getRankWiseProduct(Context applicationContext,int rankID){
+    public LiveData<List<Products>> getRankWiseProduct(Context applicationContext, int rankID) {
         return DatabaseManager.getInstance(applicationContext).getAppDatabase().productDao().getRankWiseProduct(rankID);
-    }*/
+    }
 }
