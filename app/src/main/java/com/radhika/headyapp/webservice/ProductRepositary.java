@@ -34,13 +34,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductRepositary {
 
+    public static ProductRepositary instance;
     private static Retrofit retrofit;
     private MutableLiveData<MainPojo> productList = new MutableLiveData<>();
     private LiveData<List<Categories>> mutableLiveDataCategory = new MutableLiveData<>();
     private LiveData<List<Products>> mutableLiveDataSubCategory = new MutableLiveData<>();
 
-    public ProductRepositary() {
-    }
+
 
     private static Retrofit getInstance() {
         if (retrofit == null) {
@@ -71,9 +71,7 @@ public class ProductRepositary {
             public void onResponse(Call<MainPojo> call, Response<MainPojo> response) {
                 productList.setValue(response.body());
                 Log.d("onResponse", response.body().toString());
-
             }
-
 
             @Override
             public void onFailure(Call<MainPojo> call, Throwable t) {

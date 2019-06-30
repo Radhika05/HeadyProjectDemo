@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
+<menu
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/filter"
+        android:icon="@drawable/my_service"
         android:title="@string/label_menu_home"
         android:visible="true"
         app:showAsAction="ifRoom"/>
@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/none"
-        android:title="download"
+        android:title="@string/label_menu_home"
         android:visible="false"
         app:showAsAction="never"/>
 

@@ -1,13 +1,16 @@
 package com.radhika.headyapp.view.Fragment;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -16,14 +19,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.headyapp.R;
-import com.radhika.headyapp.model.Categories;
 import com.radhika.headyapp.model.Products;
 import com.radhika.headyapp.model.Rankings;
-import com.radhika.headyapp.view.adapter.CategoryAdapter;
 import com.radhika.headyapp.view.adapter.SearchAdapter;
 import com.radhika.headyapp.viewmodel.ProductViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,10 +33,12 @@ import java.util.List;
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
 
+    TextView offline;
     private ProductViewModel productViewModel;
     private Button textRank1, textRank2, textRank3;
     private String[] catRankName;
     private RecyclerView recyclerView;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,20 +62,33 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     private void bindSpinner() {
         List<Rankings> rankings = productViewModel.getRankCategory(this.getContext());
-        catRankName = new String[rankings.size()];
-        for (int i = 0; i < rankings.size(); i++) {
-            catRankName[i] = rankings.get(i).getRanking();
+        if(rankings!=null){
+            catRankName = new String[rankings.size()];
+            for (int i = 0; i < rankings.size(); i++) {
+                catRankName[i] = rankings.get(i).getRanking();
+            }
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initView(View view) {
         textRank1 = view.findViewById(R.id.btnRank1);
         textRank2 = view.findViewById(R.id.btnRank2);
         textRank3 = view.findViewById(R.id.btnRank3);
+        offline = Objects.requireNonNull(getActivity()).findViewById(R.id.offline_txt);
         recyclerView = view.findViewById(R.id.rv_products);
-        textRank1.setText(catRankName[0]);
-        textRank2.setText(catRankName[1]);
-        textRank3.setText(catRankName[2]);
+        if(catRankName!=null && catRankName.length!=0){
+            textRank1.setText(catRankName[0]);
+            textRank2.setText(catRankName[1]);
+            textRank3.setText(catRankName[2]);
+            offline.setVisibility(View.GONE);
+        }
+        else {
+            textRank1.setVisibility(View.GONE);
+            textRank2.setVisibility(View.GONE);
+            textRank3.setVisibility(View.GONE);
+            offline.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

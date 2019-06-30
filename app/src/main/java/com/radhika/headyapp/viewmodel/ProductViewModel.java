@@ -22,15 +22,15 @@ import java.util.List;
 public class ProductViewModel extends AndroidViewModel {
 
     private LiveData<List<Categories>> mutableLiveDataCategory;
-    private List<TempSubCat> list;
+    private LiveData<List<TempSubCat>> list;
     private MutableLiveData<MainPojo> productList;
-    private ProductRepositary productRepositary = new ProductRepositary();
+    private ProductRepositary productRepositary = new ProductRepositary() ;
     public ProductViewModel(@NonNull Application application) {
         super(application);
     }
 
 
-    public MutableLiveData<MainPojo> getHeroes(Context context) {
+    public MutableLiveData<MainPojo> getProducts(Context context) {
         if (productList == null) {
             productList =  productRepositary.loadProduct(context);
         }
@@ -44,7 +44,7 @@ public class ProductViewModel extends AndroidViewModel {
         return  mutableLiveDataCategory;
     }
 
-    public List<TempSubCat> getSubCategoryA(Context context,int catId) {
+    public LiveData<List<TempSubCat>> getSubCategoryA(Context context,int catId) {
         if (list == null) {
             list =  productRepositary.getSubCategoryA(context,catId);
         }

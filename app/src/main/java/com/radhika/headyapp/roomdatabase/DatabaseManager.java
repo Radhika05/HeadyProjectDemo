@@ -9,7 +9,6 @@ public class DatabaseManager {
     private static DatabaseManager mInstance;
     private ProductDatabase productDatabase;
 
-
     private DatabaseManager(Context mCtx) {
         productDatabase = Room.databaseBuilder(mCtx, ProductDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
     }

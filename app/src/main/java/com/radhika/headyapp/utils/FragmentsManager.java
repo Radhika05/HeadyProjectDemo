@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class FragmentsManager {
 
-    private static final String TAG = "FragmentsManager";
+
     private static FragmentTransaction transaction;
 
     private static FragmentTransaction getTransaction(Activity activity){

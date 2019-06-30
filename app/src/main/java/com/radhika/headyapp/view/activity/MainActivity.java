@@ -27,14 +27,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.toolTxt.setText(getString(R.string.label_menu_home));
         CategoryFragment categoryFragment = new CategoryFragment();
         FragmentsManager.replaceFragment(this, categoryFragment, R.id.frame_one, false);
         binding.navigation.setOnNavigationItemSelectedListener(this);
         productViewModel= ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getHeroes(this).observe(this, new Observer<MainPojo>() {
+        productViewModel.getProducts(this).observe(this, new Observer<MainPojo>() {
             @Override
             public void onChanged(MainPojo categories) {
-                productViewModel.inserData(getApplicationContext(),categories);
+                if (categories != null) {
+                    productViewModel.inserData(getApplicationContext(), categories);
+                }
             }
         });
     }
