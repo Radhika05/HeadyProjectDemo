@@ -45,16 +45,16 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
-        recyclerView=view.findViewById(R.id.dashboard_recycler);
+        recyclerView = view.findViewById(R.id.dashboard_recycler);
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
         getCategoryList();
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.getCategory(getContext()).observe(this, new Observer<List<Categories>>() {
             @Override
             public void onChanged(List<Categories> categories) {
-                if(categories!=null){
+                if (categories != null) {
                     recyclerView.setVisibility(View.VISIBLE);
-                    CategoryAdapter categoryAdapter = new CategoryAdapter(categories,img);
+                    CategoryAdapter categoryAdapter = new CategoryAdapter(categories, img);
                     recyclerView.setAdapter(categoryAdapter);
                 }
             }
@@ -78,11 +78,11 @@ public class CategoryFragment extends Fragment {
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
-             recyclerView.setLayoutManager(mLayoutManager);
-             recyclerView.setItemAnimator(new DefaultItemAnimator());
-         }
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
+}
 
 
 

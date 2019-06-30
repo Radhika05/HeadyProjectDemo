@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.headyapp.R;
+import com.radhika.headyapp.model.Categories;
 import com.radhika.headyapp.model.TempSubCat;
 import com.radhika.headyapp.utils.FragmentsManager;
 import com.radhika.headyapp.view.Fragment.ProductFragment;
@@ -64,6 +65,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             int position =  getLayoutPosition();
             ProductFragment productFragment = new ProductFragment();
             Bundle bundle = new Bundle();
+            Categories categories = subcategories.get(position).getCategories();
             bundle.putInt("productId", subcategories.get(position).getCategories().getId());
             productFragment.setArguments(bundle);
             FragmentsManager.replaceFragment((Activity) context, productFragment, R.id.frame_one, true);

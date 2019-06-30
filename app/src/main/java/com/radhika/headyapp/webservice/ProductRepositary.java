@@ -34,11 +34,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductRepositary {
 
+    private static Retrofit retrofit;
     private MutableLiveData<MainPojo> productList = new MutableLiveData<>();
-
     private LiveData<List<Categories>> mutableLiveDataCategory = new MutableLiveData<>();
     private LiveData<List<Products>> mutableLiveDataSubCategory = new MutableLiveData<>();
-    private static Retrofit retrofit;
 
     public ProductRepositary() {
     }
@@ -89,17 +88,21 @@ public class ProductRepositary {
         return mutableLiveDataCategory;
     }
 
+    public LiveData<List<Products>> getMutableLiveDataSubCategory() {
+        return mutableLiveDataSubCategory;
+    }
 
-    public MutableLiveData<MainPojo> getResponse(){
+    public MutableLiveData<MainPojo> getResponse() {
         return productList;
     }
 
-    public LiveData<List<Categories>> getCategory(Context context){
-        mutableLiveDataCategory =  DatabaseManager.getInstance(context).getAppDatabase().productDao().getCategoriesdata();
+    public LiveData<List<Categories>> getCategory(Context context) {
+        mutableLiveDataCategory = DatabaseManager.getInstance(context).getAppDatabase().productDao().getCategoriesdata();
         return getMutableLiveDataCategory();
     }
 
-    public List<TempSubCat> getSubCategoryA(Context context,int catID){
+
+    public List<TempSubCat> getSubCategoryA(Context context, int catID) {
         return DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdataA(catID);
     }
 
@@ -113,25 +116,22 @@ public class ProductRepositary {
         List<Categories> listCategory = new ArrayList<>();
         Categories categories = new Categories();
 
-
         for (int i = 0; i < productList.getCategories().size(); i++) {
             categories = productList.getCategories().get(i);
             for (int j = 0; j < productList.getCategories().get(i).getProducts().size(); j++) {
                 Products products = productList.getCategories().get(i).getProducts().get(j);
-                {
-                    for (int k = 0; k < productList.getCategories().get(i).getProducts().get(j).getVariants().size(); k++) {
-                        Variants variants = productList.getCategories().get(i).getProducts().get(j).getVariants().get(k);
-                        variants.setProduct_id(products.getId());
-                        listVariants.add(variants);
-                    }
-                    //getting the tax
-                    Tax tax = productList.getCategories().get(i).getProducts().get(j).getTax();
-                    tax.setProduct_id(products.getId());
-                    listTax.add(tax);
-                    products.setCategory_id(categories.getId());
-                    listProducts.add(products);
-                    listCategory.add(categories);
+                for (int k = 0; k < productList.getCategories().get(i).getProducts().get(j).getVariants().size(); k++) {
+                    Variants variants = productList.getCategories().get(i).getProducts().get(j).getVariants().get(k);
+                    variants.setProduct_id(products.getId());
+                    listVariants.add(variants);
                 }
+                //getting the tax
+                Tax tax = productList.getCategories().get(i).getProducts().get(j).getTax();
+                tax.setProduct_id(products.getId());
+                listTax.add(tax);
+                products.setCategory_id(categories.getId());
+                listProducts.add(products);
+                listCategory.add(categories);
             }
             //getting the sub category
             for (int j = 0; j < categories.getChild_cat().size(); j++) {
@@ -144,11 +144,12 @@ public class ProductRepositary {
 
         }
 
-        for(int m = 0; m < productList.getRankings().size(); m++) {
-          int siez =  productList.getRankings().get(m).getRankProduct().size();
-          Log.i("size", String.valueOf(siez));
+        for (int m = 0; m < productList.getRankings().size(); m++) {
+            int size = productList.getRankings().size();
             for (int j = 0; j < productList.getRankings().get(m).getRankProduct().size(); j++) {
+                size = productList.getRankings().get(m).getRankProduct().size();
                 RankProduct rankProduct = productList.getRankings().get(m).getRankProduct().get(j);
+                rankProduct.setRankings_id(m + 1);
                 listRankCategory.add(rankProduct);
             }
         }

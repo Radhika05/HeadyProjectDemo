@@ -36,19 +36,20 @@ public interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTaxes(List<Tax> variants);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insertProductRanking(List<RankProduct> rankings);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSubCategory(List<Child_Category> child_categories);
 
-
     @Query("SELECT * FROM categories where categories.id in (select child_category.catId from child_category)")
     public List<Categories> getCategories();
 
-    @Query("SELECT * FROM categories where categories.id in (select child_category.catId from child_category)")
+    @Query("select Categories.id, Categories.name from Categories\n" +
+            "left join child_category on child_category.catId = Categories.id\n" +
+            "where child_category.catId not in (select child_category.id from child_category)\n" +
+            "group by child_category.catId")
     public LiveData<List<Categories>> getCategoriesdata();
-
 
     @Query("SELECT Categories.*, Child_Category.* FROM child_category left join categories on child_category.id = categories.id where child_category.catId=:id")
     public List<TempSubCat> getSubCategoriesdataA(int id);
