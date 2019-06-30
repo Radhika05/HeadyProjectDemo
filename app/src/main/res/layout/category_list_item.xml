@@ -24,6 +24,7 @@
             android:layout_height="@dimen/_100sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:scaleType="fitXY"
+            android:src="@drawable/subcat"
             android:contentDescription="@string/image" />
 
         <TextView

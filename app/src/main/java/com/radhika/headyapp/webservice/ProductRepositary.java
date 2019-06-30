@@ -89,9 +89,6 @@ public class ProductRepositary {
         return mutableLiveDataCategory;
     }
 
-    public LiveData<List<Products>> getMutableLiveDataSubCategory() {
-        return mutableLiveDataSubCategory;
-    }
 
     public MutableLiveData<MainPojo> getResponse(){
         return productList;
@@ -101,8 +98,6 @@ public class ProductRepositary {
         mutableLiveDataCategory =  DatabaseManager.getInstance(context).getAppDatabase().productDao().getCategoriesdata();
         return getMutableLiveDataCategory();
     }
-
-
 
     public List<TempSubCat> getSubCategoryA(Context context,int catID){
         return DatabaseManager.getInstance(context).getAppDatabase().productDao().getSubCategoriesdataA(catID);

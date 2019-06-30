@@ -24,6 +24,7 @@
             android:layout_height="@dimen/_100sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:scaleType="fitXY"
+            android:src="@drawable/product"
             android:contentDescription="@string/image" />
 
         <LinearLayout
@@ -41,7 +42,7 @@
                 android:maxLines="1"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:text="Color"
+                android:text="@string/color"
                 android:textStyle="bold"
                 android:layout_marginBottom="@dimen/_5sdp" />
 
@@ -67,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Size"
+                android:text="@string/size"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:textStyle="bold"
@@ -97,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Size"
+                android:text="@string/price"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:textStyle="bold"
